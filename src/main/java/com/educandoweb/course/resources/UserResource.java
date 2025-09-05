@@ -2,6 +2,7 @@ package com.educandoweb.course.resources;
 
 import com.educandoweb.course.entity.User;
 import com.educandoweb.course.services.UserService;
+import org.hibernate.type.descriptor.sql.internal.CapacityDependentDdlType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -29,5 +30,10 @@ public class UserResource {
     public ResponseEntity<User> insert(@RequestBody User obj){
          obj = service.insert(obj);
         return ResponseEntity.ok().body(obj);
+    }
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> delete(@PathVariable Long id) {
+        service.delete(id);
+        return ResponseEntity.noContent().build();
     }
 }
